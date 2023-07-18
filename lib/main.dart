@@ -1,15 +1,20 @@
 import 'package:core/core.dart';
+import 'package:core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
+
+import 'app/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   AppDI.initFirebase();
   await Firebase.initializeApp(
     options: appLocator<FirebaseOptions>(),
   );
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
-  NotificationSettings notificationSettings =
+  final NotificationSettings notificationSettings =
       await firebaseMessaging.requestPermission(
     alert: true,
     announcement: false,
@@ -24,14 +29,13 @@ Future<void> main() async {
       'User granted permission: ${notificationSettings.authorizationStatus}');
 
   AppDI.initDependencies();
-  runApp(const App());
-}
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+  runApp(
+    EasyLocalization(
+      child: App(),
+      supportedLocales: AppLocalization.supportedLocales,
+      path: AppLocalization.langsFolderPath,
+      fallbackLocale: AppLocalization.fallbackLocale,
+    ),
+  );
 }

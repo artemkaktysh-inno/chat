@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class AppLocalization {
-  static const String langsFolderPath = 'core/resources/langs';
+  static const String langsFolderPath = 'packages/core/resources/translations';
 
   /// In case if you need more locales just create another
   /// const variable and add created locale to [supportedLocales]

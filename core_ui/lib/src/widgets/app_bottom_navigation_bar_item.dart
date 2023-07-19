@@ -49,7 +49,6 @@ class _AppBottomNavigationBarItemState
         context.dependOnInheritedWidgetOfExactType<
             InheritedAppBottomNavigationBarWidget>();
     assert(inheritedWidget != null, 'Item is used outside of AppBar');
-    print('update');
     setState(() {
       _selectedIndex = inheritedWidget!.selectedIndex;
     });

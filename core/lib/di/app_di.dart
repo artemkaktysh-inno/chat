@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:navigation/navigation.dart';
 
 import '../config/firebase_options.dart';
 
@@ -13,5 +14,9 @@ class AppDI {
     );
   }
 
-  static void initDependencies() {}
+  static void initDependencies() {
+    appLocator.registerSingleton<AppRouter>(
+      AppRouter(),
+    );
+  }
 }

@@ -16,7 +16,7 @@ part 'app_router.gr.dart';
         CustomRoute(
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 500,
-          page: MessagesForm,
+          page: MessagesScreen,
           initial: true,
         ),
         CustomRoute(

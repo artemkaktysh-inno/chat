@@ -130,7 +130,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     _deleteUserUseCase.execute(const NoParams());
     emit(
-      const ProfileState(
+      state.copyWith(
         isAuthorized: false,
         imagePath: '',
         isDisabled: true,

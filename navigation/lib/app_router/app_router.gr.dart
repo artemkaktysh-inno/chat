@@ -26,7 +26,7 @@ class _$AppRouter extends RootStackRouter {
     MessagesRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const MessagesForm(),
+        child: const MessagesScreen(),
         transitionsBuilder: TransitionsBuilders.fadeIn,
         durationInMilliseconds: 500,
         opaque: true,
@@ -80,7 +80,7 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MessagesForm]
+/// [MessagesScreen]
 class MessagesRoute extends PageRouteInfo<void> {
   const MessagesRoute()
       : super(

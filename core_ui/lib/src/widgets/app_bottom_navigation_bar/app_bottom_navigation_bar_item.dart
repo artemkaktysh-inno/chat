@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'inherited_app_bottom_navigation_bar_widget.dart';
 
@@ -63,11 +62,12 @@ class _AppBottomNavigationBarItemState
         child: AnimatedContainer(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
-            color:
-                _selectedIndex == index ? Colors.white60 : LightColors().gray,
+            color: _selectedIndex == index
+                ? Colors.white60
+                : AppColors.of(context).gray,
           ),
           alignment: Alignment.center,
-          duration: Duration(milliseconds: 500),
+          duration: const Duration(milliseconds: 500),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

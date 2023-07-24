@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       locale: context.locale,
-      localizationsDelegates: [
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         ...context.localizationDelegates,
       ],
       supportedLocales: context.supportedLocales,

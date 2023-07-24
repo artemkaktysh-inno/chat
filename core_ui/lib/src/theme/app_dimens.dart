@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 part of core_ui;
 
 class AppDimens {
@@ -70,4 +72,6 @@ class AppDimens {
   static const double RADIUS_15 = 15.0;
   static const double RADIUS_25 = 25.0;
   static const double RADIUS_30 = 30.0;
+
+  static const double heightAppBar = 55.0;
 }

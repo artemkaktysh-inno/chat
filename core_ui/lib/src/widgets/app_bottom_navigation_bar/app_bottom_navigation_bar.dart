@@ -1,10 +1,12 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/src/widgets/app_bottom_navigation_bar_item.dart';
-import 'package:core_ui/src/widgets/inherited_app_bottom_navigation_bar_widget.dart';
+import 'package:core_ui/src/widgets/app_bottom_navigation_bar/app_bottom_navigation_bar_item.dart';
+import 'package:core_ui/src/widgets/app_bottom_navigation_bar/inherited_app_bottom_navigation_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
+  const AppBottomNavigationBar({super.key});
+
   @override
   State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
 }
@@ -19,7 +21,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
       child: Builder(builder: (BuildContext context) {
         return Container(
           height: 58,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.transparent,
           ),
           child: Row(
@@ -29,7 +31,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
                 onTap: () {
                   setState(() {
                     _selectedIndex = 0;
-                    appLocator.get<AppRouter>().push(MessagesRoute());
+                    appLocator.get<AppRouter>().push(const MessagesRoute());
                   });
                 },
                 label: 'chats',
@@ -40,7 +42,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
                 onTap: () {
                   setState(() {
                     _selectedIndex = 1;
-                    appLocator.get<AppRouter>().push(ProfileRoute());
+                    appLocator.get<AppRouter>().push(const ProfileRoute());
                   });
                 },
                 label: 'profile',

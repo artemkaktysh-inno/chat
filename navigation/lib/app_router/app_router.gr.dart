@@ -36,7 +36,7 @@ class _$AppRouter extends RootStackRouter {
     ProfileRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ProfileForm(),
+        child: const ProfileScreen(),
         transitionsBuilder: TransitionsBuilders.fadeIn,
         durationInMilliseconds: 500,
         opaque: true,
@@ -58,7 +58,7 @@ class _$AppRouter extends RootStackRouter {
             ),
             RouteConfig(
               ProfileRoute.name,
-              path: 'profile-form',
+              path: 'profile-screen',
               parent: HomeRoute.name,
             ),
           ],
@@ -92,12 +92,12 @@ class MessagesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ProfileForm]
+/// [ProfileScreen]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute()
       : super(
           ProfileRoute.name,
-          path: 'profile-form',
+          path: 'profile-screen',
         );
 
   static const String name = 'ProfileRoute';

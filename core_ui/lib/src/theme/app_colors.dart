@@ -13,6 +13,8 @@ abstract class AppColors {
   Color get white;
 
   Color get gray;
+
+  Color get blue;
 }
 
 class DarkColors extends LightColors {
@@ -31,4 +33,7 @@ class LightColors implements AppColors {
 
   @override
   Color get gray => const Color.fromRGBO(217, 217, 217, 1);
+
+  @override
+  Color get blue => const Color.fromRGBO(29, 71, 153, 1);
 }

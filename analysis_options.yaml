@@ -1,3 +1,5 @@
+include: package:flutter_lints/flutter.yaml
+
 #  Specify analysis options.
 #
 #  This list of linter rules include the most useful predefined rulesets from:
@@ -13,9 +15,9 @@
 #  Android Studio, and the `flutter analyze` command.
 
 analyzer:
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: true
+  language:
+    strict-casts: false
+    strict-raw-types: true
   errors:
     missing_required_param: error
     missing_return: error
@@ -43,7 +45,7 @@ linter:
     - empty_constructor_bodies # DO use ; instead of {} for empty constructor bodies
     - empty_statements # AVOID empty statements
     - file_names # DO name source files using lowercase_with_underscores
-    - lines_longer_than_100_chars # AVOID lines longer than 80 characters
+    - lines_longer_than_80_chars # AVOID lines longer than 80 characters
     - library_names # DO name libraries using lowercase_with_underscores
     - library_prefixes # DO use lowercase_with_underscores when specifying a library prefix
     - package_prefixed_library_names # DO prefix library names with the package name and a dot-separated path

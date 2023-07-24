@@ -1,4 +1,9 @@
 {
   "chats": "Chats",
-  "profile": "Profile"
+  "profile": "Profile",
+  "edit": "Edit",
+  "save": "Save",
+  "delete_account": "Delete account",
+  "gallery": "Gallery",
+  "camera": "Camera"
 }

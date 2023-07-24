@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/localization/app_localization.dart';
+import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 
 import 'app/app.dart';
@@ -30,12 +31,14 @@ Future<void> main() async {
 
   AppDI.initDependencies();
 
+  await dataDI.initDependencies();
+
   runApp(
     EasyLocalization(
-      child: App(),
       supportedLocales: AppLocalization.supportedLocales,
       path: AppLocalization.langsFolderPath,
       fallbackLocale: AppLocalization.fallbackLocale,
+      child: const App(),
     ),
   );
 }

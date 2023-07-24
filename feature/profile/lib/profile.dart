@@ -1,3 +1,3 @@
 library profile;
 
-export 'src/profile_form.dart';
+export 'src/profile_screen.dart';

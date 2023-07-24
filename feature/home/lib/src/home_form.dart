@@ -12,9 +12,11 @@ class HomeForm extends StatefulWidget {
 class _HomeFormState extends State<HomeForm> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const AutoRouter(),
-      bottomNavigationBar: AppBottomNavigationBar(),
+    return const SafeArea(
+      child: Scaffold(
+        body: AutoRouter(),
+        bottomNavigationBar: AppBottomNavigationBar(),
+      ),
     );
   }
 }

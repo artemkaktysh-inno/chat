@@ -22,7 +22,7 @@ part 'app_router.gr.dart';
         CustomRoute(
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 500,
-          page: ProfileForm,
+          page: ProfileScreen,
         ),
       ],
     ),

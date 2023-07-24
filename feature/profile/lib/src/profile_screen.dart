@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:profile/src/profile_bloc/profile_bloc.dart';
 
@@ -9,8 +10,15 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ProfileBloc(),
+    return BlocProvider<ProfileBloc>(
+      create: (_) => ProfileBloc(
+        getLocalUserUseCase: appLocator<GetLocalUserUseCase>(),
+        addUserUseCase: appLocator<AddUserUseCase>(),
+        setImageUseCase: appLocator<SetImageUseCase>(),
+        setUserUseCase: appLocator<SetUserUseCase>(),
+        deleteUserUseCase: appLocator<DeleteUserUseCase>(),
+        fetchLocalUserUseCase: appLocator<FetchLocalUserUseCase>(),
+      ),
       child: const ProfileForm(),
     );
   }

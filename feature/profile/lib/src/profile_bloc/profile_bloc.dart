@@ -117,6 +117,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           username: event.username,
           uuid: event.uuid,
           imagePath: event.photo != null ? event.photo!.path : '',
+          isAlreadyExists: state.isAlreadyExists,
         ),
       );
     } else {
@@ -136,6 +137,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           uuid: event.uuid,
           username: event.username,
           imagePath: state.imagePath,
+          isAlreadyExists: state.isAlreadyExists,
         ),
       );
     }

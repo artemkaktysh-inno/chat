@@ -5,12 +5,14 @@ class ProfileTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool disabled;
+  final String? errorText;
 
   const ProfileTextField({
     super.key,
     required this.controller,
     required this.hintText,
     required this.disabled,
+    required this.errorText,
   });
 
   @override
@@ -25,7 +27,7 @@ class ProfileTextField extends StatelessWidget {
       child: TextField(
         enabled: !disabled,
         decoration: InputDecoration(
-          hintText: hintText,
+          hintText: hintText, errorText: errorText,
           //contentPadding: EdgeInsets.symmetric(horizontal: 9),
         ),
         controller: controller,

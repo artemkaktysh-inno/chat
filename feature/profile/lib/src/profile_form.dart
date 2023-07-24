@@ -117,97 +117,105 @@ class _ProfileFormState extends State<ProfileForm> {
               ),
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25),
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        _pickedFile == null && state.imagePath == ''
-                            ? SvgPicture.asset(
-                                AppImages.accountIcon,
-                              )
-                            : (_pickedFile == null)
-                                ? Image.network(
-                                    state.imagePath,
-                                    height: 100,
-                                    width: 100,
-                                  )
-                                : Image.file(
-                                    _pickedFile!,
-                                    height: 100,
-                                    width: 100,
-                                  ),
-                        if (!state.isDisabled)
-                          IconButton(
-                            onPressed: () {
-                              showPicker(context);
-                            },
-                            icon: SvgPicture.asset(
-                              AppImages.plusIcon,
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          _pickedFile == null && state.imagePath == ''
+                              ? SvgPicture.asset(
+                                  AppImages.accountIcon,
+                                )
+                              : (_pickedFile == null)
+                                  ? Image.network(
+                                      state.imagePath,
+                                      height: 100,
+                                      width: 100,
+                                    )
+                                  : Image.file(
+                                      _pickedFile!,
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                          if (!state.isDisabled)
+                            IconButton(
+                              onPressed: () {
+                                showPicker(context);
+                              },
+                              icon: SvgPicture.asset(
+                                AppImages.plusIcon,
+                              ),
                             ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      children: <Widget>[
+                        ProfileTextField(
+                          controller: uuidController,
+                          hintText: state.uuid != '' ? state.uuid : 'uuid'.tr(),
+                          disabled: state.isDisabled,
+                          errorText: state.isAlreadyExists
+                              ? 'already_exists'.tr()
+                              : null,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 11.0, bottom: 14),
+                          child: ProfileTextField(
+                            errorText: null,
+                            disabled: state.isDisabled,
+                            controller: nameController,
+                            hintText: state.username != ''
+                                ? state.username
+                                : ''
+                                        'username'
+                                    .tr(),
                           ),
+                        )
                       ],
                     ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      ProfileTextField(
-                        controller: uuidController,
-                        hintText: state.uuid != '' ? state.uuid : 'UUID',
-                        disabled: state.isDisabled,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 11.0, bottom: 14),
-                        child: ProfileTextField(
-                          disabled: state.isDisabled,
-                          controller: nameController,
-                          hintText: state.username != ''
-                              ? state.username
-                              : ''
-                                  'Username',
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        textStyle: AppFonts.robotoBold16.copyWith(
+                          color: AppColors.of(context).white,
                         ),
-                      )
-                    ],
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      textStyle: AppFonts.robotoBold16.copyWith(
-                        color: AppColors.of(context).white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppDimens.BORDER_RADIUS_8),
+                        ),
+                        backgroundColor: AppColors.of(context).blue,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(AppDimens.BORDER_RADIUS_8),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: Text(
+                          state.isDisabled ? 'edit'.tr() : 'save'.tr(),
+                        ),
                       ),
-                      backgroundColor: AppColors.of(context).blue,
+                      onPressed: () {
+                        BlocProvider.of<ProfileBloc>(context).add(
+                          state.isDisabled
+                              ? EditEvent()
+                              : SaveEvent(
+                                  uuid: uuidController.value.text != ''
+                                      ? uuidController.value.text
+                                      : state.uuid,
+                                  username: nameController.value.text != ''
+                                      ? nameController.value.text
+                                      : state.username,
+                                  photo: _pickedFile,
+                                ),
+                        );
+                      },
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: Text(
-                        state.isDisabled ? 'edit'.tr() : 'save'.tr(),
-                      ),
-                    ),
-                    onPressed: () {
-                      BlocProvider.of<ProfileBloc>(context).add(
-                        state.isDisabled
-                            ? EditEvent()
-                            : SaveEvent(
-                                uuid: uuidController.value.text != ''
-                                    ? uuidController.value.text
-                                    : state.uuid,
-                                username: nameController.value.text != ''
-                                    ? nameController.value.text
-                                    : state.username,
-                                photo: _pickedFile,
-                              ),
-                      );
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

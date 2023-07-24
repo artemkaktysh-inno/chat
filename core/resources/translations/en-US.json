@@ -5,5 +5,8 @@
   "save": "Save",
   "delete_account": "Delete account",
   "gallery": "Gallery",
-  "camera": "Camera"
+  "camera": "Camera",
+  "already_exists": "UUID already exists",
+  "username": "Username",
+  "UUID": "UUID"
 }

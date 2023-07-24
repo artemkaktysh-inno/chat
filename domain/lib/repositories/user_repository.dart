@@ -15,5 +15,5 @@ abstract class UserRepository {
 
   Future<void> setImage(File image);
 
-  Future<User> getUserByUuid(String uuid);
+  Future<User?> getUserByUuid(String uuid);
 }

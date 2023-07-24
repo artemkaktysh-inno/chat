@@ -6,6 +6,7 @@ class ProfileState extends Equatable {
   final String uuid;
   final String imagePath;
   final bool isAuthorized;
+  final bool isAlreadyExists;
 
   const ProfileState({
     required this.isAuthorized,
@@ -13,6 +14,7 @@ class ProfileState extends Equatable {
     required this.isDisabled,
     required this.uuid,
     required this.username,
+    required this.isAlreadyExists,
   });
 
   ProfileState copyWith({
@@ -21,6 +23,7 @@ class ProfileState extends Equatable {
     required String uuid,
     required String username,
     required String imagePath,
+    required bool isAlreadyExists,
   }) {
     return ProfileState(
       isAuthorized: isAuthorized,
@@ -28,6 +31,7 @@ class ProfileState extends Equatable {
       isDisabled: isDisabled,
       uuid: uuid,
       username: username,
+      isAlreadyExists: isAlreadyExists,
     );
   }
 
@@ -38,5 +42,6 @@ class ProfileState extends Equatable {
         isDisabled,
         uuid,
         username,
+        isAlreadyExists,
       ];
 }

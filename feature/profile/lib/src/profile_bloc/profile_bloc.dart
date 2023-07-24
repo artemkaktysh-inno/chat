@@ -11,24 +11,21 @@ export 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetLocalUserUseCase _getLocalUserUseCase;
   final AddUserUseCase _addUserUseCase;
-  final SetImageUseCase _setImageUseCase;
   final SetUserUseCase _setUserUseCase;
   final DeleteUserUseCase _deleteUserUseCase;
-  final FetchLocalUserUseCase _fetchLocalUserUseCase;
+  final GetUserByUuidUseCase _getUserByUuidUseCase;
 
   ProfileBloc({
     required GetLocalUserUseCase getLocalUserUseCase,
     required AddUserUseCase addUserUseCase,
-    required SetImageUseCase setImageUseCase,
     required SetUserUseCase setUserUseCase,
     required DeleteUserUseCase deleteUserUseCase,
-    required FetchLocalUserUseCase fetchLocalUserUseCase,
+    required GetUserByUuidUseCase getUserByUuidUseCase,
   })  : _getLocalUserUseCase = getLocalUserUseCase,
         _addUserUseCase = addUserUseCase,
-        _setImageUseCase = setImageUseCase,
         _setUserUseCase = setUserUseCase,
         _deleteUserUseCase = deleteUserUseCase,
-        _fetchLocalUserUseCase = fetchLocalUserUseCase,
+        _getUserByUuidUseCase = getUserByUuidUseCase,
         super(
           const ProfileState(
             isAuthorized: false,
@@ -36,6 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             isDisabled: true,
             username: '',
             uuid: '',
+            isAlreadyExists: false,
           ),
         ) {
     on<InitEvent>(_onInitEvent);
@@ -56,6 +54,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         isDisabled: false,
         username: state.username,
         uuid: state.uuid,
+        isAlreadyExists: state.isAlreadyExists,
       ),
     );
   }
@@ -73,6 +72,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           isDisabled: state.isDisabled,
           uuid: user.uuid,
           username: user.username,
+          isAlreadyExists: false,
         ),
       );
     }
@@ -85,6 +85,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (event.uuid == '' || event.username == '') {
       return;
     }
+
+    final User? user = await _getUserByUuidUseCase.execute(event.uuid);
+
+    if (user != null) {
+      emit(
+        state.copyWith(
+          isAuthorized: state.isAuthorized,
+          isDisabled: state.isDisabled,
+          uuid: state.uuid,
+          username: state.username,
+          imagePath: state.imagePath,
+          isAlreadyExists: state.isAlreadyExists,
+        ),
+      );
+      return;
+    }
+
     if (state.username == '') {
       _addUserUseCase.execute(
         User(
@@ -136,6 +153,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         isDisabled: true,
         uuid: '',
         username: '',
+        isAlreadyExists: false,
       ),
     );
   }

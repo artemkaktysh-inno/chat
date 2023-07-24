@@ -157,9 +157,11 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<User> getUserByUuid(String uuid) async {
-    final FirebaseUser firebaseUser =
+  Future<User?> getUserByUuid(String uuid) async {
+    final FirebaseUser? firebaseUser =
         await _firebaseProvider.getFirebaseUserByUuid(uuid);
-    return UserMapper.mapFirebaseToUser(firebaseUser);
+    return firebaseUser == null
+        ? null
+        : UserMapper.mapFirebaseToUser(firebaseUser);
   }
 }

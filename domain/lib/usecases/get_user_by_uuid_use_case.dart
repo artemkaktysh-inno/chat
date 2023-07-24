@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:domain/usecases/usecase.dart';
 
-class GetUserByUuidUseCase extends FutureUseCase<String, User> {
+class GetUserByUuidUseCase extends FutureUseCase<String, User?> {
   final UserRepository _userRepository;
 
   GetUserByUuidUseCase({
@@ -9,7 +9,7 @@ class GetUserByUuidUseCase extends FutureUseCase<String, User> {
   }) : _userRepository = userRepository;
 
   @override
-  Future<User> execute(String input) async {
+  Future<User?> execute(String input) async {
     return await _userRepository.getUserByUuid(input);
   }
 }

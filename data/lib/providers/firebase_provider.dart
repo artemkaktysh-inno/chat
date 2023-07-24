@@ -31,7 +31,7 @@ class FirebaseProvider {
         );
   }
 
-  Future<FirebaseUser> getFirebaseUserByUuid(String uuid) async {
+  Future<FirebaseUser?> getFirebaseUserByUuid(String uuid) async {
     final Query<Map<String, dynamic>> query =
         _firebaseFirestore.collection('users').where(
               'uuid',
@@ -39,7 +39,9 @@ class FirebaseProvider {
             );
     final QuerySnapshot<Map<String, dynamic>> data = await query.get();
 
-    return FirebaseUser.fromFirestore(data.docs.first, null);
+    return data.docs.isEmpty
+        ? null
+        : FirebaseUser.fromFirestore(data.docs.first, null);
   }
 
   Future<String> addFirebaseUser(FirebaseUser firebaseUser) async {

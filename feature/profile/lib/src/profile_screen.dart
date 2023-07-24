@@ -14,10 +14,9 @@ class ProfileScreen extends StatelessWidget {
       create: (_) => ProfileBloc(
         getLocalUserUseCase: appLocator<GetLocalUserUseCase>(),
         addUserUseCase: appLocator<AddUserUseCase>(),
-        setImageUseCase: appLocator<SetImageUseCase>(),
         setUserUseCase: appLocator<SetUserUseCase>(),
         deleteUserUseCase: appLocator<DeleteUserUseCase>(),
-        fetchLocalUserUseCase: appLocator<FetchLocalUserUseCase>(),
+        getUserByUuidUseCase: appLocator<GetUserByUuidUseCase>(),
       ),
       child: const ProfileForm(),
     );

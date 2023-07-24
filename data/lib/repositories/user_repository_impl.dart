@@ -57,16 +57,24 @@ class UserRepositoryImpl extends UserRepository {
       StorageConstants.id,
     );
 
-    await _firebaseProvider.setFirebaseUser(
-      id,
-      UserMapper.mapUserToFirebase(user),
-    );
-
     AppLogger().debug(user.imageUrl);
 
+    String imageUrl = '';
+
     if (user.imageUrl != '') {
-      await setImage(File(user.imageUrl));
+      imageUrl = await setImage(File(user.imageUrl));
     }
+
+    await _firebaseProvider.setFirebaseUser(
+      id,
+      UserMapper.mapUserToFirebase(
+        User(
+          uuid: user.uuid,
+          username: user.username,
+          imageUrl: imageUrl,
+        ),
+      ),
+    );
 
     await _storageProvider.setString(
       StorageConstants.username,
@@ -80,8 +88,19 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<void> addUser(User user) async {
+    String imageUrl = '';
+    if (user.imageUrl != '') {
+      imageUrl = await setImage(File(user.imageUrl));
+    }
+
     final String id = await _firebaseProvider.addFirebaseUser(
-      UserMapper.mapUserToFirebase(user),
+      UserMapper.mapUserToFirebase(
+        User(
+          username: user.username,
+          uuid: user.uuid,
+          imageUrl: imageUrl,
+        ),
+      ),
     );
     await _storageProvider.setString(
       StorageConstants.id,
@@ -95,9 +114,6 @@ class UserRepositoryImpl extends UserRepository {
       StorageConstants.uuid,
       user.uuid,
     );
-    if (user.imageUrl != '') {
-      await setImage(File(user.imageUrl));
-    }
   }
 
   @override
@@ -128,7 +144,7 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<void> setImage(File image) async {
+  Future<String> setImage(File image) async {
     final String uuid = _storageProvider.getString(
       StorageConstants.uuid,
     );
@@ -137,6 +153,7 @@ class UserRepositoryImpl extends UserRepository {
       StorageConstants.imageUrl,
       imageUrl,
     );
+    return imageUrl;
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:core/core.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 class MessagesForm extends StatefulWidget {
@@ -10,8 +12,27 @@ class MessagesForm extends StatefulWidget {
 class _MessagesFormState extends State<MessagesForm> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('messages'),
+    return Column(
+      children: <Widget>[
+        Container(
+          height: AppDimens.heightAppBar,
+          alignment: Alignment.centerRight,
+          color: AppColors.of(context).gray,
+          child: InkWell(
+            onTap: () {},
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'new_chat'.tr(),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(),
+        ),
+      ],
     );
   }
 }

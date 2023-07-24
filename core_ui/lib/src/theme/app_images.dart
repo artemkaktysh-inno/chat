@@ -9,4 +9,5 @@ class AppImages {
   static const String trashIcon = '${_baseIcons}trash.svg';
   static const String accountIcon = '${_baseIcons}account.svg';
   static const String plusIcon = '${_baseIcons}plus.svg';
+  static const String newChatIcon = '${_baseIcons}new_chat.svg';
 }

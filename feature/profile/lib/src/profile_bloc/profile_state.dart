@@ -18,20 +18,20 @@ class ProfileState extends Equatable {
   });
 
   ProfileState copyWith({
-    required bool isAuthorized,
-    required bool isDisabled,
-    required String uuid,
-    required String username,
-    required String imagePath,
-    required bool isAlreadyExists,
+    bool? isAuthorized,
+    bool? isDisabled,
+    String? uuid,
+    String? username,
+    String? imagePath,
+    bool? isAlreadyExists,
   }) {
     return ProfileState(
-      isAuthorized: isAuthorized,
-      imagePath: imagePath,
-      isDisabled: isDisabled,
-      uuid: uuid,
-      username: username,
-      isAlreadyExists: isAlreadyExists,
+      isAuthorized: isAuthorized ?? this.isAuthorized,
+      imagePath: imagePath ?? this.imagePath,
+      isDisabled: isDisabled ?? this.isDisabled,
+      uuid: uuid ?? this.uuid,
+      username: username ?? this.username,
+      isAlreadyExists: isAlreadyExists ?? this.isAlreadyExists,
     );
   }
 

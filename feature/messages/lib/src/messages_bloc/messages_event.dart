@@ -1,4 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 @immutable
-class MessagesEvent {}
+abstract class MessagesEvent {}
+
+class InitEvent extends MessagesEvent {}
+
+class NewChatEvent extends MessagesEvent {}

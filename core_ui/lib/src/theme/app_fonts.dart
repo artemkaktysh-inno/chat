@@ -16,4 +16,8 @@ class AppFonts {
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
+  static TextStyle normal14 = const TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+  );
 }

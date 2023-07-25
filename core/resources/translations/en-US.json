@@ -8,5 +8,7 @@
   "camera": "Camera",
   "already_exists": "UUID already exists",
   "username": "Username",
-  "UUID": "UUID"
+  "UUID": "UUID",
+  "empty": "Empty",
+  "create": "Create new chat"
 }

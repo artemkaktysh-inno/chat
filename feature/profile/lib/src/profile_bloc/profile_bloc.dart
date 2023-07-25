@@ -49,12 +49,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(
       state.copyWith(
-        isAuthorized: state.isAuthorized,
-        imagePath: state.imagePath,
         isDisabled: false,
-        username: state.username,
-        uuid: state.uuid,
-        isAlreadyExists: state.isAlreadyExists,
       ),
     );
   }
@@ -69,7 +64,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         state.copyWith(
           isAuthorized: true,
           imagePath: user.imageUrl,
-          isDisabled: state.isDisabled,
           uuid: user.uuid,
           username: user.username,
           isAlreadyExists: false,
@@ -91,12 +85,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (user != null) {
       emit(
         state.copyWith(
-          isAuthorized: state.isAuthorized,
-          isDisabled: state.isDisabled,
-          uuid: state.uuid,
-          username: state.username,
-          imagePath: state.imagePath,
-          isAlreadyExists: state.isAlreadyExists,
+          isAlreadyExists: true,
         ),
       );
       return;
@@ -117,7 +106,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           username: event.username,
           uuid: event.uuid,
           imagePath: event.photo != null ? event.photo!.path : '',
-          isAlreadyExists: state.isAlreadyExists,
         ),
       );
     } else {
@@ -136,8 +124,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           isDisabled: true,
           uuid: event.uuid,
           username: event.username,
-          imagePath: state.imagePath,
-          isAlreadyExists: state.isAlreadyExists,
         ),
       );
     }

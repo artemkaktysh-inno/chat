@@ -12,6 +12,8 @@ class MessagesForm extends StatefulWidget {
 }
 
 class _MessagesFormState extends State<MessagesForm> {
+  final TextEditingController uuidController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MessagesBloc, MessagesState>(
@@ -27,7 +29,7 @@ class _MessagesFormState extends State<MessagesForm> {
               color: AppColors.of(context).gray,
               child: InkWell(
                 onTap: () {
-                  BlocProvider.of<MessagesBloc>(context).add(NewChatEvent());
+                  showNewChatModalBottomSheet(context);
                 },
                 child: Row(
                   children: <Widget>[
@@ -52,8 +54,7 @@ class _MessagesFormState extends State<MessagesForm> {
                           Text('create'.tr()),
                           IconButton(
                             onPressed: () {
-                              BlocProvider.of<MessagesBloc>(context)
-                                  .add(NewChatEvent());
+                              showNewChatModalBottomSheet(context);
                             },
                             icon: SvgPicture.asset(
                               AppImages.newChatLargeIcon,
@@ -70,5 +71,21 @@ class _MessagesFormState extends State<MessagesForm> {
         );
       },
     );
+  }
+
+  void showNewChatModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: AppDimens.heightNewChat,
+          );
+        });
+  }
+
+  @override
+  void dispose() {
+    uuidController.dispose();
+    super.dispose();
   }
 }

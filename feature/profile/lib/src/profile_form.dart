@@ -5,7 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:profile/src/bloc/profile_bloc.dart';
-import 'package:profile/src/widgets/profile_text_field.dart';
+import 'package:profile/src/widgets/app_text_field.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -156,7 +156,7 @@ class _ProfileFormState extends State<ProfileForm> {
                     ),
                     Column(
                       children: <Widget>[
-                        ProfileTextField(
+                        AppTextField(
                           controller: uuidController,
                           hintText: state.uuid != '' ? state.uuid : 'uuid'.tr(),
                           disabled: state.isDisabled,
@@ -166,7 +166,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 11.0, bottom: 14),
-                          child: ProfileTextField(
+                          child: AppTextField(
                             errorText: null,
                             disabled: state.isDisabled,
                             controller: nameController,

@@ -1,13 +1,13 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
-class ProfileTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool disabled;
   final String? errorText;
 
-  const ProfileTextField({
+  const AppTextField({
     super.key,
     required this.controller,
     required this.hintText,

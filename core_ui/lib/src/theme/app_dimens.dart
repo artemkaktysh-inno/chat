@@ -77,4 +77,5 @@ class AppDimens {
 
   static const double heightAppBar = 55.0;
   static const double heightChatTile = 58.0;
+  static const double heightNewChat = 200.0;
 }

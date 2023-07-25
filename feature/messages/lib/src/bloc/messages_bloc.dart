@@ -9,13 +9,13 @@ export 'messages_state.dart';
 
 class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   final GetChatsUseCase _getChatsUseCase;
-  final GetUserByUuidUseCase _getUserByUuidUseCase;
+  final CreateChatUseCase _createChatUseCase;
 
   MessagesBloc({
     required GetChatsUseCase getChatsUseCase,
-    required GetUserByUuidUseCase getUserByUuidUseCase,
-  })  : _getUserByUuidUseCase = getUserByUuidUseCase,
-        _getChatsUseCase = getChatsUseCase,
+    required CreateChatUseCase createChatUseCase,
+  })  : _getChatsUseCase = getChatsUseCase,
+        _createChatUseCase = createChatUseCase,
         super(
           const MessagesState(chats: <Chat>[]),
         ) {

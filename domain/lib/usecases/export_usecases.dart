@@ -1,4 +1,5 @@
 export 'add_user_use_case.dart';
+export 'create_chat_use_case.dart';
 export 'delete_user_use_case.dart';
 export 'fetch_local_user_use_case.dart';
 export 'get_chats_use_case.dart';

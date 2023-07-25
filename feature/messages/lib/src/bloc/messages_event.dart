@@ -14,4 +14,10 @@ class OpenChatEvent extends MessagesEvent {
   });
 }
 
-class NewChatEvent extends MessagesEvent {}
+class NewChatEvent extends MessagesEvent {
+  final String uuid;
+
+  NewChatEvent({
+    required this.uuid,
+  });
+}

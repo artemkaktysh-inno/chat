@@ -37,7 +37,29 @@ class _ChatListTileState extends State<ChatListTile> {
         child: Container(
           height: AppDimens.heightChatTile,
           decoration: BoxDecoration(
+            color: AppColors.of(context).gray,
             borderRadius: BorderRadius.circular(AppDimens.BORDER_RADIUS_4),
+          ),
+          child: Column(
+            children: <Widget>[
+              Text(chat.lastMessage.sendTime.toString()),
+              Row(
+                children: <Widget>[
+                  chat.receiver.imageUrl != ''
+                      ? Image.network(chat.receiver.imageUrl)
+                      : SvgPicture.asset(AppImages.profileIcon),
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        Text(chat.receiver.username),
+                        Text(chat.lastMessage.content),
+                      ],
+                    ),
+                  ),
+                  Container(),
+                ],
+              ),
+            ],
           ),
         ),
       ),

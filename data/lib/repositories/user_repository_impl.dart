@@ -167,4 +167,7 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<List<Chat>?> getChats() async {}
+
+  @override
+  Future<void> createChat(String uuid) async {}
 }

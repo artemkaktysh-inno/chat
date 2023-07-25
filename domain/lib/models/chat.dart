@@ -1,20 +1,21 @@
 import 'package:core/core.dart';
 
 import 'message.dart';
+import 'user.dart';
 
 class Chat extends Equatable {
   const Chat({
-    required this.receiverUuid,
+    required this.receiver,
     required this.lastMessage,
   });
 
-  final String lastMessage;
+  final Message lastMessage;
 
-  final Message receiverUuid;
+  final User receiver;
 
   @override
   List<Object> get props => <Object>[
         lastMessage,
-        receiverUuid,
+        receiver,
       ];
 }

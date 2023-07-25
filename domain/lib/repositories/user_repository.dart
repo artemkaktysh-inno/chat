@@ -18,4 +18,6 @@ abstract class UserRepository {
   Future<User?> getUserByUuid(String uuid);
 
   Future<List<Chat>?> getChats();
+
+  Future<void> createChat(String uuid);
 }

@@ -5,7 +5,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:profile/src/bloc/profile_bloc.dart';
-import 'package:profile/src/widgets/app_text_field.dart';
+import 'package:core_ui/src/widgets/app_text_field.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});

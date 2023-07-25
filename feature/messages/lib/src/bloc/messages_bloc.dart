@@ -8,8 +8,15 @@ export 'messages_event.dart';
 export 'messages_state.dart';
 
 class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
-  MessagesBloc()
-      : super(
+  final GetChatsUseCase _getChatsUseCase;
+  final GetUserByUuidUseCase _getUserByUuidUseCase;
+
+  MessagesBloc({
+    required GetChatsUseCase getChatsUseCase,
+    required GetUserByUuidUseCase getUserByUuidUseCase,
+  })  : _getUserByUuidUseCase = getUserByUuidUseCase,
+        _getChatsUseCase = getChatsUseCase,
+        super(
           const MessagesState(chats: <Chat>[]),
         ) {
     on<InitEvent>(_onInitEvent);

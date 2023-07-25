@@ -164,4 +164,7 @@ class UserRepositoryImpl extends UserRepository {
         ? null
         : UserMapper.mapFirebaseToUser(firebaseUser);
   }
+
+  @override
+  Future<List<Chat>?> getChats() async {}
 }

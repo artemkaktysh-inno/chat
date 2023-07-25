@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import 'bloc/messages_bloc.dart';
@@ -10,7 +11,10 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MessagesBloc>(
-      create: (_) => MessagesBloc(),
+      create: (_) => MessagesBloc(
+        getUserByUuidUseCase: appLocator<GetUserByUuidUseCase>(),
+        getChatsUseCase: appLocator<GetChatsUseCase>(),
+      ),
       child: const MessagesForm(),
     );
   }

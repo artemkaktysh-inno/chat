@@ -73,5 +73,10 @@ class DataDI {
         userRepository: appLocator<UserRepository>(),
       ),
     );
+    appLocator.registerFactory<GetChatsUseCase>(
+      () => GetChatsUseCase(
+        userRepository: appLocator<UserRepository>(),
+      ),
+    );
   }
 }

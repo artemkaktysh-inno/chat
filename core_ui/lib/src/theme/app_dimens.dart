@@ -22,7 +22,9 @@ class AppDimens {
   static const double BORDER_RADIUS_100 = 100.0;
 
   static const double PADDING_4 = 4.0;
+  static const double PADDING_5 = 5.0;
   static const double PADDING_6 = 6.0;
+  static const double PADDING_7 = 7.0;
   static const double PADDING_8 = 8.0;
   static const double PADDING_10 = 10.0;
   static const double PADDING_12 = 12.0;
@@ -74,4 +76,5 @@ class AppDimens {
   static const double RADIUS_30 = 30.0;
 
   static const double heightAppBar = 55.0;
+  static const double heightChatTile = 58.0;
 }

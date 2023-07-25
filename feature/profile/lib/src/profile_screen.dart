@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:profile/src/profile_bloc/profile_bloc.dart';
+import 'package:profile/src/bloc/profile_bloc.dart';
 
 import 'profile_form.dart';
 

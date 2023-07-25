@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:messages/src/messages_bloc/messages_bloc.dart';
+import 'package:messages/src/bloc/messages_bloc.dart';
 import 'package:messages/src/widgets/chats_list.dart';
 
 class MessagesForm extends StatefulWidget {

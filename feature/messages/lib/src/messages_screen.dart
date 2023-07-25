@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
-import 'messages_bloc/messages_bloc.dart';
+import 'bloc/messages_bloc.dart';
 import 'messages_form.dart';
 
 class MessagesScreen extends StatelessWidget {

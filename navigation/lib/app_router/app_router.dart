@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:chat/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:home/home.dart';
 import 'package:messages/messages.dart';
@@ -25,6 +26,11 @@ part 'app_router.gr.dart';
           page: ProfileScreen,
         ),
       ],
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+      durationInMilliseconds: 500,
+      page: ChatScreen,
     ),
   ],
 )

@@ -23,6 +23,20 @@ class _$AppRouter extends RootStackRouter {
         child: const HomeForm(),
       );
     },
+    ChatRoute.name: (routeData) {
+      final args = routeData.argsAs<ChatRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ChatScreen(
+          uuid: args.uuid,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideBottom,
+        durationInMilliseconds: 500,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     MessagesRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -62,7 +76,11 @@ class _$AppRouter extends RootStackRouter {
               parent: HomeRoute.name,
             ),
           ],
-        )
+        ),
+        RouteConfig(
+          ChatRoute.name,
+          path: '/chat-screen',
+        ),
       ];
 }
 
@@ -77,6 +95,40 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [ChatScreen]
+class ChatRoute extends PageRouteInfo<ChatRouteArgs> {
+  ChatRoute({
+    required String uuid,
+    Key? key,
+  }) : super(
+          ChatRoute.name,
+          path: '/chat-screen',
+          args: ChatRouteArgs(
+            uuid: uuid,
+            key: key,
+          ),
+        );
+
+  static const String name = 'ChatRoute';
+}
+
+class ChatRouteArgs {
+  const ChatRouteArgs({
+    required this.uuid,
+    this.key,
+  });
+
+  final String uuid;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ChatRouteArgs{uuid: $uuid, key: $key}';
+  }
 }
 
 /// generated route for

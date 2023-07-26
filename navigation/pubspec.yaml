@@ -23,6 +23,8 @@ dependencies:
     path: ../feature/messages
   profile:
     path: ../feature/profile
+  chat:
+    path: ../feature/chat
 
 dev_dependencies:
   flutter_lints: ^2.0.2

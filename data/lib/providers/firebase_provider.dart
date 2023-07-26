@@ -4,6 +4,8 @@ import 'package:core/core.dart';
 import 'package:data/entities/firebase_user.dart';
 import 'package:path/path.dart';
 
+import '../entities/firebase_chat.dart';
+
 class FirebaseProvider {
   final FirebaseStorage _firebaseStorage;
   final FirebaseFirestore _firebaseFirestore;
@@ -15,20 +17,22 @@ class FirebaseProvider {
         _firebaseFirestore = firebaseFirestore;
 
   Future<FirebaseUser> getFirebaseUserById(String id) async {
-    final DocumentReference<FirebaseUser> docRef =
-        _firebaseFirestore.collection('users').doc(id).withConverter(
-              fromFirestore: FirebaseUser.fromFirestore,
-              toFirestore: (FirebaseUser firebaseUser, _) =>
-                  firebaseUser.toFirestore(),
-            );
+    final DocumentReference<Map<String, dynamic>> docRef =
+        _firebaseFirestore.collection('users').doc(id);
 
-    final DocumentSnapshot<FirebaseUser> snapshot = await docRef.get();
-    return snapshot.data() ??
-        FirebaseUser(
-          imageUrl: '',
-          uuid: '',
-          username: '',
-        );
+    final DocumentSnapshot<Map<String, dynamic>> snapshot = await docRef.get();
+
+    final Map<String, dynamic>? data = snapshot.data();
+
+    if (data == null) {
+      return FirebaseUser(
+        imageUrl: '',
+        uuid: '',
+        username: '',
+      );
+    } else {
+      return FirebaseUser.fromJson(data);
+    }
   }
 
   Future<FirebaseUser?> getFirebaseUserByUuid(String uuid) async {
@@ -41,14 +45,14 @@ class FirebaseProvider {
 
     return data.docs.isEmpty
         ? null
-        : FirebaseUser.fromFirestore(data.docs.first, null);
+        : FirebaseUser.fromJson(data.docs.first.data());
   }
 
   Future<String> addFirebaseUser(FirebaseUser firebaseUser) async {
     String id = '';
     await _firebaseFirestore
         .collection('users')
-        .add(firebaseUser.toFirestore())
+        .add(firebaseUser.toJson())
         .then(
           (DocumentReference<Map<String, dynamic>> documentSnapshot) =>
               id = documentSnapshot.id,
@@ -61,7 +65,7 @@ class FirebaseProvider {
     await _firebaseFirestore
         .collection('users')
         .doc(id)
-        .set(firebaseUser.toFirestore());
+        .set(firebaseUser.toJson());
   }
 
   Future<void> deleteUser(String id) async {
@@ -77,5 +81,38 @@ class FirebaseProvider {
     await imageRef.putFile(image);
 
     return await imageRef.getDownloadURL();
+  }
+
+  Future<List<FirebaseChat>> getChats(String uuid) async {
+    final QuerySnapshot<Map<String, dynamic>> snapshotSender =
+        await _firebaseFirestore
+            .collection('chats')
+            .where('sender_uuid', isEqualTo: uuid)
+            .get();
+    final QuerySnapshot<Map<String, dynamic>> snapshotReceiver =
+        await _firebaseFirestore
+            .collection('chats')
+            .where('receiver_uuid', isEqualTo: uuid)
+            .get();
+
+    final List<FirebaseChat> listSender = snapshotSender.docs.isEmpty
+        ? <FirebaseChat>[]
+        : snapshotSender.docs
+            .map((QueryDocumentSnapshot<Map<String, dynamic>> snapshot) =>
+                FirebaseChat.fromJson(snapshot.data()))
+            .toList();
+
+    final List<FirebaseChat> listReceiver = snapshotReceiver.docs.isEmpty
+        ? <FirebaseChat>[]
+        : snapshotReceiver.docs
+            .map((QueryDocumentSnapshot<Map<String, dynamic>> snapshot) =>
+                FirebaseChat.fromJson(snapshot.data()))
+            .toList();
+
+    return <FirebaseChat>[...listSender, ...listReceiver];
+  }
+
+  Future<void> createChat(FirebaseChat chat) async {
+    await _firebaseFirestore.collection('chats').add(chat.toJson());
   }
 }

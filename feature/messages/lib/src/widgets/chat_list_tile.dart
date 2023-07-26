@@ -7,10 +7,12 @@ import '../bloc/messages_bloc.dart';
 
 class ChatListTile extends StatefulWidget {
   final Chat chat;
+  final User user;
 
   const ChatListTile({
     super.key,
     required this.chat,
+    required this.user,
   });
 
   @override
@@ -19,11 +21,13 @@ class ChatListTile extends StatefulWidget {
 
 class _ChatListTileState extends State<ChatListTile> {
   late Chat chat;
+  late User user;
 
   @override
   void initState() {
     super.initState();
     chat = widget.chat;
+    user = widget.user;
   }
 
   @override
@@ -42,17 +46,17 @@ class _ChatListTileState extends State<ChatListTile> {
           ),
           child: Column(
             children: <Widget>[
-              Text(chat.lastMessage.sendTime.toString()),
+              Text(chat.lastMessage?.sendTime.toString() ?? ''),
               Row(
                 children: <Widget>[
-                  chat.receiver.imageUrl != ''
-                      ? Image.network(chat.receiver.imageUrl)
+                  user.imageUrl != ''
+                      ? Image.network(user.imageUrl)
                       : SvgPicture.asset(AppImages.profileIcon),
                   Expanded(
                     child: Column(
                       children: <Widget>[
-                        Text(chat.receiver.username),
-                        Text(chat.lastMessage.content),
+                        Text(user.username),
+                        Text(chat.lastMessage?.content ?? ''),
                       ],
                     ),
                   ),

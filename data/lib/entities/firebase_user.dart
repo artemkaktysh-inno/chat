@@ -11,19 +11,15 @@ class FirebaseUser {
     required this.username,
   });
 
-  factory FirebaseUser.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
-  ) {
-    final Map<String, dynamic>? data = snapshot.data();
+  factory FirebaseUser.fromJson(Map<String, dynamic> data) {
     return FirebaseUser(
-      imageUrl: data?['image_url'],
-      uuid: data?['uuid'],
-      username: data?['username'],
+      imageUrl: data['image_url'],
+      uuid: data['uuid'],
+      username: data['username'],
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'username': username,
       'uuid': uuid,

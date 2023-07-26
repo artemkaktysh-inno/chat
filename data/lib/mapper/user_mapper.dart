@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import '../entities/firebase_user.dart';
 
 class UserMapper {
-  static User mapFirebaseToUser(FirebaseUser firebaseUser) {
+  static User mapFromFirebase(FirebaseUser firebaseUser) {
     return User(
       username: firebaseUser.username,
       uuid: firebaseUser.uuid,
@@ -11,7 +11,7 @@ class UserMapper {
     );
   }
 
-  static FirebaseUser mapUserToFirebase(User user) {
+  static FirebaseUser mapToFirebase(User user) {
     return FirebaseUser(
       imageUrl: user.imageUrl,
       uuid: user.uuid,

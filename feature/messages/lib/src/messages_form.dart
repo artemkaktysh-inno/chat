@@ -65,6 +65,7 @@ class _MessagesFormState extends State<MessagesForm> {
                     )
                   : ChatList(
                       chats: state.chats,
+                      users: state.users,
                     ),
             ),
           ],
@@ -75,12 +76,57 @@ class _MessagesFormState extends State<MessagesForm> {
 
   void showNewChatModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            height: AppDimens.heightNewChat,
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: SvgPicture.asset(AppImages.cancelIcon),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                height: AppDimens.heightNewChat,
+                decoration: BoxDecoration(
+                  color: AppColors.of(context).white,
+                ),
+                child: Column(
+                  children: <Widget>[
+                    AppTextField(
+                      controller: uuidController,
+                      hintText: 'uuid'.tr(),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        BlocProvider.of<MessagesBloc>(context).add(
+                          NewChatEvent(uuid: uuidController.value.text),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        textStyle: AppFonts.robotoBold16.copyWith(
+                          color: AppColors.of(context).white,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(AppDimens.BORDER_RADIUS_8),
+                        ),
+                        backgroundColor: AppColors.of(context).blue,
+                      ),
+                      child: Text('create'.tr()),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override

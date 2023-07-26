@@ -5,10 +5,12 @@ import 'package:messages/src/widgets/chat_list_tile.dart';
 
 class ChatList extends StatefulWidget {
   final List<Chat> chats;
+  final List<User> users;
 
   const ChatList({
     super.key,
     required this.chats,
+    required this.users,
   });
 
   @override
@@ -17,11 +19,13 @@ class ChatList extends StatefulWidget {
 
 class _ChatListState extends State<ChatList> {
   late List<Chat> chats;
+  late List<User> users;
 
   @override
   void initState() {
     super.initState();
     chats = widget.chats;
+    users = widget.users;
   }
 
   @override
@@ -35,6 +39,7 @@ class _ChatListState extends State<ChatList> {
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return ChatListTile(
+            user: users[index],
             chat: chats[index],
           );
         },

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:core/core.dart';
 import 'package:data/entities/entities.dart';
+import 'package:data/entities/firebase_chat.dart';
+import 'package:data/mapper/chat_mapper.dart';
 import 'package:data/mapper/user_mapper.dart';
 import 'package:data/providers/firebase_provider.dart';
 import 'package:data/providers/storage_provider.dart';
@@ -24,7 +26,7 @@ class UserRepositoryImpl extends UserRepository {
     );
     final FirebaseUser firebaseUser =
         await _firebaseProvider.getFirebaseUserById(id);
-    return UserMapper.mapFirebaseToUser(
+    return UserMapper.mapFromFirebase(
       firebaseUser,
     );
   }
@@ -67,7 +69,7 @@ class UserRepositoryImpl extends UserRepository {
 
     await _firebaseProvider.setFirebaseUser(
       id,
-      UserMapper.mapUserToFirebase(
+      UserMapper.mapToFirebase(
         User(
           uuid: user.uuid,
           username: user.username,
@@ -94,7 +96,7 @@ class UserRepositoryImpl extends UserRepository {
     }
 
     final String id = await _firebaseProvider.addFirebaseUser(
-      UserMapper.mapUserToFirebase(
+      UserMapper.mapToFirebase(
         User(
           username: user.username,
           uuid: user.uuid,
@@ -162,12 +164,31 @@ class UserRepositoryImpl extends UserRepository {
         await _firebaseProvider.getFirebaseUserByUuid(uuid);
     return firebaseUser == null
         ? null
-        : UserMapper.mapFirebaseToUser(firebaseUser);
+        : UserMapper.mapFromFirebase(firebaseUser);
   }
 
   @override
-  Future<List<Chat>?> getChats() async {}
+  Future<List<Chat>?> getChats() async {
+    final String uuid = _storageProvider.getString(
+      StorageConstants.uuid,
+    );
+    final List<FirebaseChat>? firebaseChats =
+        await _firebaseProvider.getChats(uuid);
+    final List<Chat>? chats = firebaseChats
+        ?.map((FirebaseChat chat) => ChatMapper.mapFromFirebase(chat))
+        .toList();
+    return chats;
+  }
 
   @override
-  Future<void> createChat(String uuid) async {}
+  Future<void> createChat(String uuid) async {
+    final String localUuid = _storageProvider.getString(StorageConstants.uuid);
+
+    final FirebaseChat chat = FirebaseChat(
+      receiverUuid: uuid,
+      senderUuid: localUuid,
+    );
+
+    await _firebaseProvider.createChat(chat);
+  }
 }

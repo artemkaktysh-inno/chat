@@ -17,7 +17,10 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   })  : _getChatsUseCase = getChatsUseCase,
         _createChatUseCase = createChatUseCase,
         super(
-          const MessagesState(chats: <Chat>[]),
+          const MessagesState(
+            chats: <Chat>[],
+            users: <User>[],
+          ),
         ) {
     on<InitEvent>(_onInitEvent);
     on<NewChatEvent>(_onNewChatEvent);
@@ -28,10 +31,14 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   Future<void> _onInitEvent(
     InitEvent event,
     Emitter<MessagesState> emit,
-  ) async {}
+  ) async {
+
+  }
 
   Future<void> _onNewChatEvent(
     NewChatEvent event,
     Emitter<MessagesState> emit,
-  ) async {}
+  ) async {
+    _createChatUseCase.execute(event.uuid);
+  }
 }

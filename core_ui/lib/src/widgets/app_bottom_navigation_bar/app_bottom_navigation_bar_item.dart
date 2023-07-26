@@ -83,7 +83,9 @@ class _AppBottomNavigationBarItemState
               ),
               Text(
                 label.tr(),
-                style: AppFonts.normal20,
+                style: AppFonts.normal20.copyWith(
+                  color: Colors.black,
+                ),
               ),
             ],
           ),

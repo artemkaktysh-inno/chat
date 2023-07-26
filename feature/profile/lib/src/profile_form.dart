@@ -104,7 +104,9 @@ class _ProfileFormState extends State<ProfileForm> {
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Text(
                                     'delete_account'.tr(),
-                                    style: AppFonts.normal20,
+                                    style: AppFonts.normal20.copyWith(
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ],

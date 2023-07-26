@@ -12,5 +12,11 @@
   "empty": "Empty",
   "create": "Create new chat",
   "new_chat": "New chat",
-  "user_uuid": "User UUID"
+  "user_uuid": "User UUID",
+  "chat": "Chat",
+  "delete_chat": "Delete chat",
+  "edit_message": "Edit message",
+  "delete_message": "Delete message",
+  "message": "Message",
+  "writing": "writing"
 }

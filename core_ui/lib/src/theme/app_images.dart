@@ -12,4 +12,7 @@ class AppImages {
   static const String newChatIcon = '${_baseIcons}new_chat.svg';
   static const String newChatLargeIcon = '${_baseIcons}new_chat_large.svg';
   static const String cancelIcon = '${_baseIcons}cancel.svg';
+  static const String sendIcon = '${_baseIcons}send.svg';
+  static const String editIcon = '${_baseIcons}edit.svg';
+  static const String backIcon = '${_baseIcons}back.svg';
 }

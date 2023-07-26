@@ -46,6 +46,7 @@ class _ProfileFormState extends State<ProfileForm> {
                   await pickImage(
                     imageSource: ImageSource.gallery,
                   );
+                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
@@ -55,6 +56,7 @@ class _ProfileFormState extends State<ProfileForm> {
                   await pickImage(
                     imageSource: ImageSource.camera,
                   );
+                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -157,7 +159,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       children: <Widget>[
                         AppTextField(
                           controller: uuidController,
-                          hintText: state.uuid != '' ? state.uuid : 'uuid'.tr(),
+                          hintText: state.uuid != '' ? state.uuid : 'UUID'.tr(),
                           disabled: state.isDisabled,
                           errorText: state.isAlreadyExists
                               ? 'already_exists'.tr()

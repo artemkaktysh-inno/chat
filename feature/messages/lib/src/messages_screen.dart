@@ -12,6 +12,7 @@ class MessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<MessagesBloc>(
       create: (_) => MessagesBloc(
+        getUserByUuidUseCase: appLocator<GetUserByUuidUseCase>(),
         createChatUseCase: appLocator<CreateChatUseCase>(),
         getChatsUseCase: appLocator<GetChatsUseCase>(),
       ),

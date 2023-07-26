@@ -98,9 +98,10 @@ class FirebaseProvider {
     final List<FirebaseChat> listSender = snapshotSender.docs.isEmpty
         ? <FirebaseChat>[]
         : snapshotSender.docs
-            .map((QueryDocumentSnapshot<Map<String, dynamic>> snapshot) =>
-                FirebaseChat.fromJson(snapshot.data()))
-            .toList();
+            .map((QueryDocumentSnapshot<Map<String, dynamic>> snapshot) {
+            AppLogger().warning(snapshot.data());
+            return FirebaseChat.fromJson(snapshot.data());
+          }).toList();
 
     final List<FirebaseChat> listReceiver = snapshotReceiver.docs.isEmpty
         ? <FirebaseChat>[]

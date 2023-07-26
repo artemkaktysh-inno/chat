@@ -37,6 +37,7 @@ class _ChatListState extends State<ChatList> {
         top: AppDimens.PADDING_8,
       ),
       child: ListView.builder(
+        itemCount: chats.length,
         itemBuilder: (BuildContext context, int index) {
           return ChatListTile(
             user: users[index],

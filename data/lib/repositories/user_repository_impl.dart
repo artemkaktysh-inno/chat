@@ -172,12 +172,13 @@ class UserRepositoryImpl extends UserRepository {
     final String uuid = _storageProvider.getString(
       StorageConstants.uuid,
     );
-    final List<FirebaseChat>? firebaseChats =
+    AppLogger().info(uuid);
+    final List<FirebaseChat> firebaseChats =
         await _firebaseProvider.getChats(uuid);
-    final List<Chat>? chats = firebaseChats
-        ?.map((FirebaseChat chat) => ChatMapper.mapFromFirebase(chat))
+    final List<Chat> chats = firebaseChats
+        .map((FirebaseChat chat) => ChatMapper.mapFromFirebase(chat))
         .toList();
-    return chats;
+    return chats.isEmpty ? null : chats;
   }
 
   @override

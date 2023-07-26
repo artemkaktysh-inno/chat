@@ -6,10 +6,12 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final bool? disabled;
   final String? errorText;
+  final double? width;
 
   const AppTextField({
     required this.controller,
     required this.hintText,
+    this.width,
     this.disabled,
     this.errorText,
     super.key,
@@ -23,7 +25,7 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       height: 40,
-      width: 250,
+      width: width ?? 250,
       child: TextField(
         enabled: disabled != null ? !disabled! : null,
         decoration: InputDecoration(

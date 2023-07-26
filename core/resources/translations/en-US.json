@@ -10,5 +10,7 @@
   "username": "Username",
   "UUID": "UUID",
   "empty": "Empty",
-  "create": "Create new chat"
+  "create": "Create new chat",
+  "new_chat": "New chat",
+  "user_uuid": "User UUID"
 }

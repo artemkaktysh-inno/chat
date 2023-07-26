@@ -18,9 +18,11 @@ class FirebaseChat {
     return FirebaseChat(
       receiverUuid: data['receiver_uuid'],
       senderUuid: data['sender_uuid'],
-      lastMessage: FirebaseMessage.fromJson(
-        data['last_message'],
-      ),
+      lastMessage: data['last_message'] != null
+          ? FirebaseMessage.fromJson(
+              data['last_message'],
+            )
+          : null,
     );
   }
 

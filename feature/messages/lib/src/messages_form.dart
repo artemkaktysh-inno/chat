@@ -17,51 +17,63 @@ class _MessagesFormState extends State<MessagesForm> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MessagesBloc, MessagesState>(
-      builder: (
-        BuildContext context,
-        MessagesState state,
-      ) {
+      builder: (BuildContext context, MessagesState state) {
         return Column(
           children: <Widget>[
             Container(
               height: AppDimens.heightAppBar,
-              alignment: Alignment.centerRight,
               color: AppColors.of(context).gray,
-              child: InkWell(
-                onTap: () {
-                  showNewChatModalBottomSheet(context);
-                },
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      'new_chat'.tr(),
-                      style: AppFonts.normal14,
-                    ),
-                    SvgPicture.asset(
-                      AppImages.newChatIcon,
-                    ),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 17.0),
+                child: InkWell(
+                  onTap: () {
+                    showNewChatModalBottomSheet(context);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(right: AppDimens.PADDING_6),
+                        child: Text(
+                          'new_chat'.tr(),
+                          style: AppFonts.normal14,
+                        ),
+                      ),
+                      SvgPicture.asset(
+                        AppImages.newChatIcon,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
             Expanded(
               child: state.chats.isEmpty
-                  ? Container(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: <Widget>[
-                          Text('empty'.tr()),
-                          Text('create'.tr()),
-                          IconButton(
-                            onPressed: () {
-                              showNewChatModalBottomSheet(context);
-                            },
-                            icon: SvgPicture.asset(
-                              AppImages.newChatLargeIcon,
-                            ),
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'empty'.tr(),
+                          style: AppFonts.normal20
+                              .copyWith(color: AppColors.of(context).darkGray),
+                        ),
+                        Text(
+                          'create'.tr(),
+                          style: AppFonts.normal20.copyWith(
+                            color: AppColors.of(context).darkGray,
                           ),
-                        ],
-                      ),
+                        ),
+                        IconButton(
+                          iconSize: 62,
+                          onPressed: () {
+                            showNewChatModalBottomSheet(context);
+                          },
+                          icon: SvgPicture.asset(
+                            AppImages.newChatLargeIcon,
+                          ),
+                        ),
+                      ],
                     )
                   : ChatList(
                       chats: state.chats,
@@ -76,54 +88,73 @@ class _MessagesFormState extends State<MessagesForm> {
 
   void showNewChatModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
+      backgroundColor: AppColors.of(context).hilightBlue,
       context: context,
-      builder: (BuildContext context) {
-        return Column(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: SvgPicture.asset(AppImages.cancelIcon),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppDimens.BORDER_RADIUS_10),
+          topRight: Radius.circular(AppDimens.BORDER_RADIUS_10),
+        ),
+      ),
+      builder: (_) {
+        return SizedBox(
+          height: AppDimens.heightNewChat,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 19.0),
+                    child: Text(
+                      'new_chat'.tr(),
+                      style: AppFonts.normal20.copyWith(
+                        color: AppColors.of(context).darkGray,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: SvgPicture.asset(AppImages.cancelIcon),
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              child: Container(
-                height: AppDimens.heightNewChat,
-                decoration: BoxDecoration(
-                  color: AppColors.of(context).white,
-                ),
+              Expanded(
                 child: Column(
                   children: <Widget>[
                     AppTextField(
                       controller: uuidController,
-                      hintText: 'uuid'.tr(),
+                      hintText: 'user_uuid'.tr(),
+                      width: 340,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        BlocProvider.of<MessagesBloc>(context).add(
-                          NewChatEvent(uuid: uuidController.value.text),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        textStyle: AppFonts.robotoBold16.copyWith(
-                          color: AppColors.of(context).white,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<MessagesBloc>(context).add(
+                            NewChatEvent(uuid: uuidController.value.text),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          textStyle: AppFonts.robotoBold16.copyWith(
+                            color: AppColors.of(context).white,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                AppDimens.BORDER_RADIUS_8),
+                          ),
+                          backgroundColor: AppColors.of(context).blue,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppDimens.BORDER_RADIUS_8),
-                        ),
-                        backgroundColor: AppColors.of(context).blue,
+                        child: Text('create'.tr()),
                       ),
-                      child: Text('create'.tr()),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

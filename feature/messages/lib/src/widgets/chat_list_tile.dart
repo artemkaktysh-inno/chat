@@ -50,8 +50,16 @@ class _ChatListTileState extends State<ChatListTile> {
               Row(
                 children: <Widget>[
                   user.imageUrl != ''
-                      ? Image.network(user.imageUrl)
-                      : SvgPicture.asset(AppImages.profileIcon),
+                      ? Image.network(
+                          user.imageUrl,
+                          height: 50,
+                          width: 50,
+                        )
+                      : SvgPicture.asset(
+                          AppImages.profileIcon,
+                          height: 50,
+                          width: 50,
+                        ),
                   Expanded(
                     child: Column(
                       children: <Widget>[

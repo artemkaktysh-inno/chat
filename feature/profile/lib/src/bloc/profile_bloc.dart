@@ -76,10 +76,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     SaveEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    if (event.uuid == '' || event.username == '') {
-      return;
-    }
-
     final User? user = await _getUserByUuidUseCase.execute(event.uuid);
 
     if (user != null) {

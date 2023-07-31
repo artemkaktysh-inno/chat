@@ -27,12 +27,14 @@ class AppDimens {
   static const double PADDING_7 = 7.0;
   static const double PADDING_8 = 8.0;
   static const double PADDING_10 = 10.0;
+  static const double PADDING_11 = 11.0;
   static const double PADDING_12 = 12.0;
   static const double PADDING_14 = 14.0;
   static const double PADDING_16 = 16.0;
   static const double PADDING_18 = 18.0;
   static const double PADDING_20 = 20.0;
   static const double PADDING_24 = 24.0;
+  static const double PADDING_25 = 25.0;
   static const double PADDING_28 = 28.0;
 
   static const double MARGIN_4 = 4.0;
@@ -54,6 +56,8 @@ class AppDimens {
   static const double modalHeightDetailDiscount = 350;
   static const double heightMarketStatisticsChart = 380;
   static const double maxHeightOfVideos = 400;
+  static const double popUpMenuHeight = 40;
+  static const double imageSize = 100;
 
   static const double ELEVATION_2 = 2.0;
   static const double ELEVATION_8 = 8.0;
@@ -67,6 +71,9 @@ class AppDimens {
   static const double SCROLL_START_POSITION = 0.0;
 
   static const double ASPECT_RATIO_18_9 = 18 / 9;
+
+  static const double OFFSET_0 = 0;
+  static const double OFFSET_50 = 50.0;
 
   static const double RADIUS_0 = 0;
   static const double RADIUS_5 = 5.0;

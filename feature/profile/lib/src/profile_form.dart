@@ -78,30 +78,35 @@ class _ProfileFormState extends State<ProfileForm> {
               color: AppColors.of(context).gray,
               child: Padding(
                 padding: const EdgeInsets.only(
-                  right: 11,
+                  right: AppDimens.PADDING_11,
                 ),
                 child: PopupMenuButton(
-                  offset: const Offset(0.0, 50.0),
+                  offset: const Offset(
+                    AppDimens.OFFSET_0,
+                    AppDimens.OFFSET_50,
+                  ),
                   child: SvgPicture.asset(
                     AppImages.moreIcon,
                   ),
                   itemBuilder: (BuildContext context) {
                     return <PopupMenuItem>[
                       PopupMenuItem(
-                        height: 40,
+                        height: AppDimens.popUpMenuHeight,
                         child: InkWell(
                           onTap: () {
                             BlocProvider.of<ProfileBloc>(context)
                                 .add(DeleteUserEvent());
                           },
                           child: SizedBox(
-                            height: 40,
+                            height: AppDimens.popUpMenuHeight,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 SvgPicture.asset(AppImages.trashIcon),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 10),
+                                  padding: const EdgeInsets.only(
+                                    left: AppDimens.PADDING_10,
+                                  ),
                                   child: Text(
                                     'delete_account'.tr(),
                                     style: AppFonts.normal20.copyWith(
@@ -124,9 +129,11 @@ class _ProfileFormState extends State<ProfileForm> {
                 alignment: Alignment.center,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 25),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppDimens.PADDING_25,
+                      ),
                       child: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
@@ -137,13 +144,13 @@ class _ProfileFormState extends State<ProfileForm> {
                               : (_pickedFile == null)
                                   ? Image.network(
                                       state.imagePath,
-                                      height: 100,
-                                      width: 100,
+                                      height: AppDimens.imageSize,
+                                      width: AppDimens.imageSize,
                                     )
                                   : Image.file(
                                       _pickedFile!,
-                                      height: 100,
-                                      width: 100,
+                                      height: AppDimens.imageSize,
+                                      width: AppDimens.imageSize,
                                     ),
                           if (!state.isDisabled)
                             IconButton(
@@ -168,16 +175,18 @@ class _ProfileFormState extends State<ProfileForm> {
                               : null,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 11.0, bottom: 14),
+
+                          padding: const EdgeInsets.only(
+                            top: AppDimens.PADDING_11,
+                            bottom: AppDimens.PADDING_14,
+                          ),
                           child: AppTextField(
                             errorText: null,
                             disabled: state.isDisabled,
                             controller: nameController,
                             hintText: state.username != ''
                                 ? state.username
-                                : ''
-                                        'username'
-                                    .tr(),
+                                : 'username'.tr(),
                           ),
                         )
                       ],
@@ -195,7 +204,7 @@ class _ProfileFormState extends State<ProfileForm> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
+                          horizontal: AppDimens.PADDING_16,
                         ),
                         child: Text(
                           state.isDisabled ? 'edit'.tr() : 'save'.tr(),

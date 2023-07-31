@@ -83,5 +83,15 @@ class DataDI {
         userRepository: appLocator<UserRepository>(),
       ),
     );
+    appLocator.registerFactory<GetMessagesUseCase>(
+      () => GetMessagesUseCase(
+        userRepository: appLocator<UserRepository>(),
+      ),
+    );
+    appLocator.registerFactory<SendMessageUseCase>(
+      () => SendMessageUseCase(
+        userRepository: appLocator<UserRepository>(),
+      ),
+    );
   }
 }

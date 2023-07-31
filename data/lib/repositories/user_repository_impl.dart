@@ -192,4 +192,12 @@ class UserRepositoryImpl extends UserRepository {
 
     await _firebaseProvider.createChat(chat);
   }
+
+  @override
+  Future<List<Message>> getMessages(String uuid) async {
+    return [];
+  }
+
+  @override
+  Future<void> sendMessage(Message message) async {}
 }

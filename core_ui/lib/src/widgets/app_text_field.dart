@@ -7,14 +7,16 @@ class AppTextField extends StatelessWidget {
   final bool? disabled;
   final String? errorText;
   final double? width;
+  final bool underline;
 
   const AppTextField({
     required this.controller,
     required this.hintText,
+    super.key,
     this.width,
     this.disabled,
     this.errorText,
-    super.key,
+    this.underline = false,
   });
 
   @override
@@ -25,11 +27,16 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       height: 40,
-      width: width ?? 250,
+      width: width,
       child: TextField(
         enabled: disabled != null ? !disabled! : null,
         decoration: InputDecoration(
           hintText: hintText, errorText: errorText,
+          border: underline
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.of(context).blue),
+                )
+              : null,
           //contentPadding: EdgeInsets.symmetric(horizontal: 9),
         ),
         controller: controller,

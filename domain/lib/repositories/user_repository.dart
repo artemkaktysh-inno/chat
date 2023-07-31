@@ -20,4 +20,8 @@ abstract class UserRepository {
   Future<List<Chat>?> getChats();
 
   Future<void> createChat(String uuid);
+
+  Future<List<Message>> getMessages(String uuid);
+
+  Future<void> sendMessage(Message message);
 }

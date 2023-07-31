@@ -83,6 +83,7 @@ class FirebaseProvider {
     return await imageRef.getDownloadURL();
   }
 
+  //TODO: rework to single request
   Future<List<FirebaseChat>> getChats(String uuid) async {
     final QuerySnapshot<Map<String, dynamic>> snapshotSender =
         await _firebaseFirestore

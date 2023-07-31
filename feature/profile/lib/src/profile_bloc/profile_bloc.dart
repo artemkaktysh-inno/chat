@@ -82,64 +82,61 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     SaveEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    if (event.uuid == '' || event.username == '') {
-      return;
-    }
+    if (!(event.uuid == '' || event.username == '')) {
+      final User? user = await _getUserByUuidUseCase.execute(event.uuid);
 
-    final User? user = await _getUserByUuidUseCase.execute(event.uuid);
-
-    if (user != null) {
-      emit(
-        state.copyWith(
-          isAuthorized: state.isAuthorized,
-          isDisabled: state.isDisabled,
-          uuid: state.uuid,
-          username: state.username,
-          imagePath: state.imagePath,
-          isAlreadyExists: state.isAlreadyExists,
-        ),
-      );
-      return;
-    }
-
-    if (state.username == '') {
-      _addUserUseCase.execute(
-        User(
-          username: event.username,
-          uuid: event.uuid,
-          imageUrl: event.photo != null ? event.photo!.path : '',
-        ),
-      );
-      emit(
-        state.copyWith(
-          isDisabled: true,
-          isAuthorized: true,
-          username: event.username,
-          uuid: event.uuid,
-          imagePath: event.photo != null ? event.photo!.path : '',
-          isAlreadyExists: state.isAlreadyExists,
-        ),
-      );
-    } else {
-      _setUserUseCase.execute(
-        User(
-          username: event.username,
-          uuid: event.uuid,
-          imageUrl: event.photo != null
-              ? event.photo!.path
-              : (state.imagePath != '' ? state.imagePath : ''),
-        ),
-      );
-      emit(
-        state.copyWith(
-          isAuthorized: true,
-          isDisabled: true,
-          uuid: event.uuid,
-          username: event.username,
-          imagePath: state.imagePath,
-          isAlreadyExists: state.isAlreadyExists,
-        ),
-      );
+      if (user != null) {
+        emit(
+          state.copyWith(
+            isAuthorized: state.isAuthorized,
+            isDisabled: state.isDisabled,
+            uuid: state.uuid,
+            username: state.username,
+            imagePath: state.imagePath,
+            isAlreadyExists: state.isAlreadyExists,
+          ),
+        );
+      } else {
+        if (state.username == '') {
+          _addUserUseCase.execute(
+            User(
+              username: event.username,
+              uuid: event.uuid,
+              imageUrl: event.photo != null ? event.photo!.path : '',
+            ),
+          );
+          emit(
+            state.copyWith(
+              isDisabled: true,
+              isAuthorized: true,
+              username: event.username,
+              uuid: event.uuid,
+              imagePath: event.photo != null ? event.photo!.path : '',
+              isAlreadyExists: state.isAlreadyExists,
+            ),
+          );
+        } else {
+          _setUserUseCase.execute(
+            User(
+              username: event.username,
+              uuid: event.uuid,
+              imageUrl: event.photo != null
+                  ? event.photo!.path
+                  : (state.imagePath != '' ? state.imagePath : ''),
+            ),
+          );
+          emit(
+            state.copyWith(
+              isAuthorized: true,
+              isDisabled: true,
+              uuid: event.uuid,
+              username: event.username,
+              imagePath: state.imagePath,
+              isAlreadyExists: state.isAlreadyExists,
+            ),
+          );
+        }
+      }
     }
   }
 
